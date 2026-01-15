@@ -1,0 +1,54 @@
+.venv
+.venv/*
+.env
+.DS_Store
+.idea
+*.swp
+myenv
+myenv/
+myenv/*
+
+# Backend files
+Website/backend/best_model.pth
+Website/backend/best_RNN_model.pth
+Website/backend/best_CNN_model.pth
+Website/backend/best_bert_model.pth
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# next.js
+Website/frontend/.next/
+Website/frontend/out/
+
+# production
+Website/frontend/build
+
+# debug
+Website/frontend/npm-debug.log*
+Website/frontend/yarn-debug.log*
+Website/frontend/yarn-error.log*
+Website/frontend/.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+Website/frontend/.vercel
+
+# typescript
+Website/frontend/*.tsbuildinfo
+Website/frontend/next-env.d.ts
+
+# Node.js
+Website/frontend/node_modules/
+Website/frontend/npm-debug.log
+Website/frontend/yarn-error.log
+Website/frontend/yarn-debug.log
+Website/frontend/.pnpm-debug.log
+
+
+
+

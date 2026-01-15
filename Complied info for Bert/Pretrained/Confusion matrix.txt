@@ -1,0 +1,42 @@
+git This confusion matrix shows two classes:
+
+Class 0 (non-bot)
+
+Class 1 (bot)
+
+Rows represent the actual (true) class.
+
+Columns represent the predicted class.
+
+Reading each cell:
+
+Top-left cell (198):
+
+True Negatives (TN)
+
+There are 198 comments that are actually non-bot (class 0), and the model correctly predicted them as non-bot.
+
+Top-right cell (5):
+
+False Positives (FP)
+
+There are 5 comments that are actually non-bot, but the model incorrectly predicted them as bot.
+
+Bottom-left cell (0):
+
+False Negatives (FN)
+
+There are 0 comments that are actually bot, but were incorrectly predicted as non-bot. (Perfect recall for the bot class!)
+
+Bottom-right cell (245):
+
+True Positives (TP)
+
+There are 245 comments that are actually bots (class 1), and the model correctly predicted them as bots.
+
+What It Means
+The model correctly identifies almost all comments, with a very small number (5) of non-bot comments mislabeled as bots.
+
+There are no missed bots (FN = 0), so the model never incorrectly labels a bot as non-bot.
+
+Overall, this indicates extremely high accuracy and perfect recall for the bot class.

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Bot Detector</title>
+    <style>
+        body { font-family: sans-serif; padding: 2em; }
+        input, button { padding: 0.5em; width: 400px; }
+        #results { margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>YouTube Bot Detection</h1>
+    {% comment %} <input type="text" id="videoUrl" placeholder="Enter YouTube video URL here" />
+    <button id="analyzeBtn" onclick="analyze()">Analyze Comments</button>
+    <div id="results"></div>
+    <div id="loading-container" style="display:none; margin-top: 1em;">
+        <p>🔄 Analyzing comments...</p>
+        <div style="width: 400px; background: #eee; border-radius: 8px; overflow: hidden;">
+            <div id="progress-bar" style="width: 0%; height: 20px; background: #007bff;"></div>
+        </div>
+    </div>
+    <script>
+        async function analyze() {
+            const url = document.getElementById("videoUrl").value;
+            const resultsDiv = document.getElementById("results");
+            const loadingContainer = document.getElementById("loading-container");
+            const progressBar = document.getElementById("progress-bar");
+            loadingContainer.style.display = "block";
+            progressBar.style.width = "0%";
+            resultsDiv.innerHTML = "";
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                if (progress < 90) {
+                    progress += Math.random() * 4;
+                    progressBar.style.width = `${progress}%`;
+                }
+            }, 100);
+            try {
+                const res = await fetch("/analyze", {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                const data = await res.json();
+                clearInterval(progressInterval);
+                progressBar.style.width = "100%";
+                loadingContainer.style.display = "none";
+                if (data.error) {
+                    resultsDiv.innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
+                    return;
+                }
+                resultsDiv.innerHTML = `
+                  <h2>${data.video_title}</h2>
+                  <p><strong>Total Comments Analyzed:</strong> ${data.total}</p>
+                  <p><strong>Bot Comments:</strong> ${data.bots}</p>
+                  <p><strong>Non-Bot Comments:</strong> ${data.non_bots}</p>
+                  <h3>Prediction Distribution</h3>
+                  <img src="data:image/png;base64,${data.label_plot}" alt="Prediction Distribution Chart" />
+                  ${data.conf_matrix_plot ? `
+                    <h3>Confusion Matrix</h3>
+                    <img src="data:image/png;base64,${data.conf_matrix_plot}" alt="Confusion Matrix Chart" />
+                  ` : ""}
+                `;
+            } catch (err) {
+                clearInterval(progressInterval);
+                loadingContainer.style.display = "none";
+                resultsDiv.innerHTML = `<p style="color:red;">Request failed. Try again.</p>`;
+            }
+        }
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "End") {
+                document.getElementById("analyzeBtn").click();
+            }
+        });
+    </script> {% endcomment %}
+</body>
+</html>

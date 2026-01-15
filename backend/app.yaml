@@ -1,0 +1,4 @@
+runtime: python39
+entrypoint: gunicorn -b :$PORT server:app
+env_variables:
+  YOUTUBE_API_KEY: "AIzaSyBI5opUzLWrb5S3Upch4Uq5smnzZFYK6tQ"

@@ -1,0 +1,14 @@
+Flask
+flask-cors
+gunicorn
+transformers
+scikit-learn
+matplotlib
+seaborn
+python-dotenv
+tqdm
+pandas
+numpy
+torch
+google-api-python-client
+requests

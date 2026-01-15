@@ -1,3 +1,8 @@
+Other Contributers include Git Users: 
+dsamia25 - Aaditya
+seunadekunle - Seun Adekunle
+Priyanshu-Shekhar - Priyanshu Shekhar
+agam-sidhu - Agam Sidhu
 
 ### Demo
 
